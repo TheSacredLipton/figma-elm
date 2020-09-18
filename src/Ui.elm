@@ -23,7 +23,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( 0
+    ( 1
     , Cmd.none
     )
 
@@ -42,13 +42,13 @@ update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
         Create ->
-            ( 1, create model )
+            ( model, create model )
 
         Increment ->
             ( model + 1, Cmd.none )
 
         Decrement ->
-            ( if model > 0 then
+            ( if model > 1 then
                 model - 1
 
               else

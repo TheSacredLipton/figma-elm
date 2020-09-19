@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const isOptimize = process.env.npm_lifecycle_event === 'build'
 
 module.exports = (env, argv) => ({
   devtool: argv.mode === 'production' ? false : 'inline-source-map',
@@ -20,7 +21,10 @@ module.exports = (env, argv) => ({
         test: /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
         use: {
-          loader: 'elm-webpack-loader'
+          loader: 'elm-webpack-loader',
+          options: {
+            optimize: isOptimize
+          }
         }
       },
       {
